@@ -1,0 +1,120 @@
+﻿<script language="vb" runat="server">
+    
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+    Dim idContent As Integer = 0
+    Dim contentCovers As Integer = 0
+'/////////////////////////////////////////////////////////////////////////////////////////
+
+    Sub Page_load()
+   		 
+        Dim root_mypage As CORE_PAGE = New CORE_PAGE
+        
+       
+        
+        Dim mybox As CORE_BOX = New CORE_BOX(_id_box)
+        boxStyle = mybox.style
+		 If mybox.box_description <> String.Empty Then ltBoxDescription.Text = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+        
+        idContent = CORE.MyPage(Me).root_mypage.treeObject.id_content
+       
+        If idContent > 0 Then
+            Dim content As CORE_CONTENT = New CORE_CONTENT(idContent)
+            contentCovers = content.content_covers
+            content.Dispose()
+            content = Nothing
+            covers()
+            Return
+        End If
+        
+        If CORE.MyPage(Me).root_mypage.contentObject.id_content > 0 Then
+            idContent = CORE.MyPage(Me).root_mypage.contentObject.id_content
+            contentCovers = CORE.MyPage(Me).root_mypage.contentObject.content_covers
+            covers()
+            Return
+        End If
+        
+		
+    End Sub
+		
+		
+    Sub covers()
+    
+        If contentCovers > 0 Then
+                
+            Dim i As Integer = 0
+            Dim covers As StringBuilder = New StringBuilder
+            Dim imgPath As String = String.Empty
+				
+            Dim small As Integer = 250
+            Dim storedSmall As String = "[" & small.ToString() & "x0]"
+            
+            For i = 1 To contentCovers
+                    
+                imgPath = ConfigurationManager.AppSettings("CORE_related_folder").Replace("\", "/") & idContent & "/" & idContent & "_" & i
+					
+					
+                If CORE_filesystem.fileExists(imgPath & storedSmall & ".jpg") Then
+                    covers.Append("<img src=""" & imgPath & storedSmall & ".jpg"" alt="""" class=""contentCover""/>")
+                Else
+					
+                    If CORE_filesystem.fileExists(imgPath & ".jpg") Then
+                        covers.Append("<img src=""/covers.aspx?img=" & imgPath & ".jpg&w=" & small.ToString() & "&h=0"" alt="""" class=""contentCover""/>")
+                    End If
+                End If
+					
+					
+					
+                                       
+            Next
+                
+            ltCovers.Text = covers.ToString()
+            covers = Nothing
+            ltCovers.Dispose()
+            ltCovers = Nothing
+               
+        End If
+            
+       
+        
+    End Sub
+    
+   
+		
+		</script>
+ 
+<div id="box_<%=id_box%>">
+<div <%=boxStyle %>>
+<asp:literal id="ltBoxDescription" runat="server"/>
+<asp:Literal ID="ltCovers" runat="server"></asp:Literal>
+</div>
+</div>

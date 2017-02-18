@@ -1,0 +1,63 @@
+<%@ Control Language="VB" %>
+<script language="vb" runat="server">
+
+
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+
+    Sub page_load()
+        
+        
+        Dim mybox As New CORE_BOX(id_box)
+        boxStyle = mybox.style
+        boxTitle = mybox.box_title
+        boxDescription = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+
+
+        
+    End Sub
+
+</script>
+
+<%  If CORE_filesystem.fileExists(CORE.MyPage(Me).root_mypage.site_folder & "_css/_" & CORE.MyPage(Me).root_mypage.language & "/_" & CORE.MyPage(Me).root_mypage.site_css & "/_images/header/" & CORE.MyPage(Me).root_mypage.id_tree & ".swf") Then%>
+
+<script type="text/javascript" language="javascript">
+swfobject.embedSWF("<%=CORE.MyPage(Me).root_mypage.site_folder%>_css/_<%=CORE.MyPage(Me).root_mypage.language%>/_<%=CORE.MyPage(Me).root_mypage.site_css%>/_images/header/<%=CORE.MyPage(Me).root_mypage.id_tree%>.swf", "treePlaceholder", "800", "160", "9.0.0","","",{wmode:"transparent"});
+</script>
+<%end if %>
+<!--start box_<%=id_box%> -->
+<div id="box_<%=id_box%>">
+<div <%=boxStyle %> style="width:800px; height:160px; background-image:url(<%=CORE.MyPage(Me).root_mypage.site_folder%>_css/_<%=CORE.MyPage(Me).root_mypage.language%>/_<%=CORE.MyPage(Me).root_mypage.site_css%>/_images/header/headerImage.jpg)" >
+<div id="treePlaceholder"></div>
+</div>
+</div>
+<!--end box_<%=id_box%> -->

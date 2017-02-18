@@ -1,0 +1,93 @@
+﻿<script language="vb" runat="server">
+    
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    Dim contents As ArrayList
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+    Dim id_content As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+    Dim mycontent As CORE_CONTENT = Nothing
+    
+    
+'/////////////////////////////////////////////////////////////////////////////////////////
+
+    Sub Page_load()
+        
+        
+        Dim mybox As CORE_BOX = New CORE_BOX(_id_box)
+        boxStyle = mybox.style
+        contents = mybox.contents
+        mybox.Dispose()
+        mybox = Nothing
+		
+        id_content = CORE.MyPage(Me).root_mypage.treeObject.id_content
+        
+        If Not contents Is Nothing Then id_content = contents(0)
+                
+        If id_content > 0 Then
+            mycontent = New CORE_CONTENT(id_content)
+            lt_content_title.Text = mycontent.content_title
+            lt_content_description.Text = mycontent.content_description
+            lt_content_date.Text = mycontent.content_date_publication
+            mycontent.Dispose()
+            mycontent = Nothing
+        End If
+        
+        If CORE.MyPage(Me).root_mypage.id_content > 0 And id_content = 0 Then
+            Try
+                lt_content_title.Text = CORE.MyPage(Me).root_mypage.contentObject.content_title
+                lt_content_description.Text = CORE.MyPage(Me).root_mypage.contentObject.content_description
+                lt_content_date.Text = CORE_formatting.dateFormat(CORE.MyPage(Me).root_mypage.contentObject.content_date_publication, "ddd, d MMMM yyyy")
+                CORE.MyPage(Me).root_mypage.contentObject.dispose()
+            Catch err As Exception
+                
+                CORE.application_error_trace(err.ToString)
+            End Try
+            
+            
+        End If
+        
+       
+		
+        lt_content_title.Dispose()
+        lt_content_title = Nothing
+		
+        lt_content_description.Dispose()
+        lt_content_description = Nothing
+		
+    End Sub
+		
+		
+		</script>
+        
+<div id="box_<%=id_box%>">
+<div <%=boxStyle%>>
+<h2><span><asp:literal id="lt_content_title" runat="server" EnableViewState="false"></asp:literal></span></h2>
+<asp:literal id="lt_content_description" runat="server" EnableViewState="false"></asp:literal>
+<span id="datePublication"><asp:literal id="lt_content_date" runat="server" EnableViewState="false"></asp:literal></span>
+</div>
+</div>

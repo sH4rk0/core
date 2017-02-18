@@ -1,0 +1,24 @@
+﻿
+
+#homeNews{ padding:0 10px 0 20px;}
+#homeNews h2{}
+#homeNews h2 span{  display:none;}
+#homeNews a{float:left;}
+#homeNews a img{margin-right:15px;}
+#homeNews h3 {font-size:1.5em; line-height:100%; margin-bottom:10px; }
+#homeNews h3 a{ float:none; color:#000;}
+#homeNews p {font-size:1.3em;line-height:135%; margin-top:5px; color:#666;}
+#homeNews .contentItem{ margin-bottom:20px; clear:both; min-height:100px;}
+
+
+#relatedBox h3, #relatedBox #relatedTabs{display:none;}
+#relatedBox  ul{margin:0 0 0 30px; padding: 0 0 0 0; list-style-type:none;}
+
+.relatedDocuments ul li{ background-image:url(/core/core_sites/raffaelePetta/_css/_it/_default/_images/arrow.gif); background-repeat:no-repeat; background-position:0px 6px; padding-left:10px; margin-bottom:10px;}
+
+.relatedDocuments ul li a{display:block;}
+.relatedDocuments ul li span.size{ color:#777;}
+.relatedDocuments ul li span.size span{}
+
+.relatedDocuments ul li span.download{padding-left:10px; color:#777;}
+.relatedDocuments ul li span.download span{}

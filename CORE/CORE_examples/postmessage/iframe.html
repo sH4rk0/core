@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>iframe</title>
+<script src="http://www.raffaelepetta.it/CORE/CORE_js/libs/draggy/draggy.js"></script>
+<style>
+body{ margin:0; padding:0; font-family: 'Helvetica Neue', arial, sans-serif; color:#fff;}
+#dragcontainer{position:relative; width:100%; height:200px; background-color:#8b5429;}
+#dragger{position:absolute; top:0; left:0; width:40px; height:40px; background-color:#94e089;}
+
+</style>
+</head>
+
+<body>
+<label>iframe page (iframe.html)</label>
+<div id="dragcontainer"><div id="dragger"></div></div>
+
+<script>
+var dragger=document.getElementById("dragger");
+
+var PMC={  
+	parentDomain:"http://www.zero89.it",
+	init:function(){
+		if (window.addEventListener){ 
+			addEventListener("message", PMC.postListener, false) 
+		} else { 
+			attachEvent("onmessage", PMC.postListener) 
+		}
+		console.log("(iframe) init complete.");
+			},  
+	sendMessage:function(_data){ window.parent.postMessage(_data,PMC.parentDomain); },
+	sendPosition:function(x,y){ PMC.sendMessage({"method":"updatePosition","message":{"x":x,"y":y}}); },   
+	postListener:function(event){  
+		if ( event.origin !== PMC.parentDomain ) return;  
+		switch(event.data.method){  
+		
+			case "updatePosition":
+			window.dragger.moveTo(event.data.message.x,event.data.message.y)
+			break;
+			}  
+		}  
+	}
+	
+PMC.init();
+
+
+</script>
+
+<script>
+       
+        window.dragger = new Draggy('dragger', {onChange: PMC.sendPosition,bindTo: 'dragcontainer'} );
+    
+</script>
+
+
+<!--
+
+&lt;script&gt;<br><br>
+var PMC={<br> 
+	parentDomain:"http://www.zero89.it",<br><br>
+	init:function(){<br>
+		if (window.addEventListener){<br>
+			addEventListener("message", PMC.postListener, false);<br>
+		} else {<br>
+			attachEvent("onmessage", PMC.postListener);<br>
+		}<br>
+			},<br><br>
+	sendMessage:function(_data){ window.parent.postMessage(_data,PMC.parentDomain); },<br><br>
+	sendPosition:function(x,y){ PMC.sendMessage({"method":"updatePosition","message":{"x":x,"y":y}}); },<br><br> 
+	postListener:function(event){<br>
+		if ( event.origin !== PMC.parentDomain ) return;<br>
+		switch(event.data.method){<br><br>
+        	case "updatePosition":<br>
+			window.dragger.moveTo(event.data.message.x,event.data.message.y);<br>
+			break;<br>
+			}<br>
+		}<br>
+	}<br><br>
+PMC.init();<br><br>
+&lt;/script&gt;
+
+
+-->
+
+</body>
+</html>

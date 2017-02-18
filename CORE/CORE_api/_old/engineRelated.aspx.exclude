@@ -1,0 +1,506 @@
+﻿<%@ Import namespace="System.Data"%>
+<%@ Import namespace="System.Data.sqlClient"%>
+<%@ Import Namespace="System.xml" %>
+
+<script runat="server">
+    Dim language_id As Integer
+    Dim id_content As Integer
+    Dim id_related As Integer
+    Dim related_type As Integer
+    Dim related_id_user As Integer
+    Dim id_key As Integer
+    Dim id_tree As Integer
+    Dim id_site As Integer
+    Dim rows As Integer
+    Dim mypage As Integer
+    Dim id_context As Integer
+    Dim responseType As String
+    Dim orderBy As String
+    Dim status As String
+    
+    Sub page_load()
+     
+        If Request("idLanguage") <> "" Then language_id = Convert.ToInt32(Request("idLanguage"))
+        If Request("idContent") <> "" Then id_content = Convert.ToInt32(Request("idContent"))
+        If Request("idRelated") <> "" Then id_related = Convert.ToInt32(Request("idRelated"))
+        If Request("related_type") <> "" Then related_type = Convert.ToInt32(Request("related_type"))
+        
+        If Request("idUser") <> "" Then related_id_user = Convert.ToInt32(CORE_CRYPTOGRAPHY.decrypt(Request("idUser")))
+        
+        If Request("idKey") <> "" Then id_key = Convert.ToInt32(Request("idKey"))
+        If Request("idTree") <> "" Then id_tree = Convert.ToInt32(Request("idTree"))
+        If Request("idSite") <> "" Then id_site = Convert.ToInt32(Request("idSite"))
+        If Request("rows") <> "" Then rows = Convert.ToInt32(Request("rows"))
+        If Request("page") <> "" Then mypage = Convert.ToInt32(Request("page"))
+        If Request("idLanguage") <> "" Then id_context = Request("idLanguage")
+        If Request("orderBy") <> "" Then orderBy = Request("orderBy")
+        If Request("status") <> "" Then status = Request("status")
+        
+        responseType = CORE.checkResponse()
+        
+        
+        If Not CORE_USER.hasRole(CORE_USER.userRole.relatedAdministrator) Then returnData("<values><error errorId=""666"" errorLabel=""Access Forbidden"" errorMessage=""Your account is not authenticated to execute this action.""/></values>") : Return
+     
+        Select Case Request("who")
+            
+            
+    		
+           
+    		
+    		
+            '#############################################################
+            '#############################################################	
+            '#############################################################	
+            
+            
+            
+            
+    		
+            Case "removeRelated"
+                
+                Dim related As CORE_RELATED = New CORE_RELATED(id_related)
+                Try
+                   
+                    related.removeRelation(id_content, id_related)
+                    related.Dispose()
+                    related = Nothing
+    		
+                    Dim cacheobj As CORE_CACHE = New CORE_CACHE("contents_related_list_" & id_content.ToString().ToLower(), "contents")
+                    cacheobj.remove_cache()
+                    cacheobj.Dispose()
+                    cacheobj = Nothing
+                
+                
+                    returnData("<values><error errorId=""0"" errorLabel=""""/></values>")
+                
+                Catch err As Exception
+    		
+                    returnData("<values><error errorId=""500"" errorLabel=""Remove Related Error""/></values>")
+    		
+                Finally
+    		
+                    If Not related Is Nothing Then related.Dispose() : related = Nothing
+                End Try
+                
+              
+    		
+                '#############################################################
+                '#############################################################	
+                '#############################################################	
+    		
+            Case "deleteRelated"
+                
+                Dim related As CORE_RELATED = New CORE_RELATED(id_related)
+                Try
+    					
+                    
+                    Dim path As String = ConfigurationManager.AppSettings("CORE_related_folder").ToString() & related.related_link
+                    related.delete_related(id_related)
+                    related.Dispose()
+                    related = Nothing
+    		
+                                     
+                    CORE_filesystem.fileDelete(path)
+    		
+                    Dim cacheobj As CORE_CACHE = New CORE_CACHE("contents_related_list_" & id_content.ToString().ToLower(), "contents")
+                    cacheobj.remove_cache()
+                    cacheobj.Dispose()
+                    cacheobj = Nothing
+                    returnData("<values><error errorId=""0"" errorLabel=""""/></values>")
+                
+                Catch err As Exception
+    		
+                    returnData("<values><error errorId=""501"" errorLabel=""Delete Related Error""/></values>")
+    		
+                Finally
+    		
+                    If Not related Is Nothing Then related.Dispose() : related = Nothing
+                End Try
+                
+           
+    		
+                '#############################################################
+                '#############################################################	
+                '#############################################################	
+    		
+            Case "removeRelatedFile"
+                
+                Dim related As CORE_RELATED = New CORE_RELATED
+                Try
+                    If id_related > 0 Then
+                        Dim cacheobj As CORE_CACHE = New CORE_CACHE("related_" & id_related.ToString() & ".cache", "relateds")
+                        cacheobj.remove_cache()
+    		
+                        related = New CORE_RELATED(id_related)
+                        Dim path As String = ConfigurationManager.AppSettings("CORE_related_folder").ToString() & related.related_link
+                        related.related_link = ""
+                        related.related_size = 0
+                        related.related_update(related)
+    		
+                        CORE_filesystem.fileDelete(path)
+                        related.Dispose()
+                        related = Nothing
+    		
+                        cacheobj.remove_cache()
+                        cacheobj.Dispose()
+                        cacheobj = Nothing
+                        returnData("<values><error errorId=""0"" errorLabel=""""/></values>")
+                        'Response.Write(path)
+                    End If
+                
+                Catch err As Exception
+    		
+                    returnData("<values><error errorId=""502"" errorLabel=""Delete Related File Error""/></values>")
+    		
+                Finally
+    		
+                    If Not related Is Nothing Then related.Dispose() : related = Nothing
+                End Try
+    		
+    	
+   
+
+                '############################################################# 
+                '#############################################################	
+                '#############################################################			
+            Case "getRelatedValues"
+    		
+    		
+    		
+                Dim searcher As CORE_RELATED_SEARCHER = New CORE_RELATED_SEARCHER
+                
+                Try
+                    If id_content > 0 Then searcher.id_content = id_content
+                    If rows > 0 Then searcher.rows = rows
+                    If mypage > 0 Then searcher.page = mypage
+                    If language_id > 0 Then searcher.related_language = language_id
+                    If related_type > 0 Then searcher.related_type = related_type
+                    If related_id_user > 0 Then searcher.related_id_user = related_id_user
+                                       
+                    Select Case status
+                        
+                        Case "0"
+                            searcher.searchStatus = CORE_RELATED_SEARCHER.status.enabled
+                        Case "1"
+                            searcher.searchStatus = CORE_RELATED_SEARCHER.status.disabled
+                        Case "2"
+                            searcher.searchStatus = CORE_RELATED_SEARCHER.status.all
+                        
+                    End Select
+                    
+                    
+                    Select Case orderBy
+                        Case "0"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedIdDesc
+                        Case "1"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedIdAsc
+                        Case "2"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedDateCreationDesc
+                        Case "3"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedDateCreationAsc
+                        Case "4"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedEnabledDesc
+                        Case "5"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedEnabledAsc
+                        Case "6"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedTitleDesc
+                        Case "7"
+                            searcher.searchOrder = CORE_RELATED_SEARCHER.order.relatedTitleAsc
+                       
+                    End Select
+                    
+                    
+                    
+                    Dim myvalues As StringBuilder = New StringBuilder
+                    
+                    Dim mycoll As CORE_RELATED_COLLECTION(Of CORE_RELATED) = searcher.search()
+                    Dim count As Integer = searcher.searchcount()
+                    
+                    Dim re As CORE_RELATED
+        
+                    For Each re In mycoll
+                        myvalues.Append("<value title=""" & Server.HtmlEncode(re.related_title) & """  id_related=""" & re.id_related & """  language=""" & re.related_language & """ target=""" & re.related_target & """ enabled=""" & re.related_enabled & """  clicks=""" & re.related_clicks & """ link=""" & Server.HtmlEncode(re.related_link) & """ type=""" & re.related_type & """ id_user=""" & re.related_id_user & """ width=""" & re.related_width & """ height=""" & re.related_height & """ size=""" & re.related_size & """ date=""" & re.related_date_creation & """  />")
+                    Next
+                        		
+                
+                    returnData("<values><error errorId=""0"" errorLabel=""""/><count count=""" & count & """/>" & myvalues.ToString() & "</values>")
+                
+             
+                    searcher.Dispose()
+                    searcher = Nothing
+                Catch
+                    returnData("<values><error errorId=""503"" errorLabel=""Get Related Values Error""/></values>")
+                    
+                    
+                Finally
+                
+                    If Not searcher Is Nothing Then searcher.Dispose() : searcher = Nothing
+                End Try
+                
+                
+    				
+                '#############################################################
+                '#############################################################	
+                '#############################################################			
+            Case "manageRelated"
+    		
+                Dim related As CORE_RELATED = New CORE_RELATED
+    		
+                Try
+                    Dim related_title As String = Request("related_title")
+                    Dim related_type As Integer = 0
+                    If Request("related_type") <> "" Then related_type = Convert.ToInt32(Request("related_type"))
+    				
+    				
+                    Dim related_link As String = Request("related_link")
+                    Dim related_enabled As String = Request("related_enabled")
+                    If related_enabled = "" Then related_enabled = "false"
+                    Dim related_target As String = Request("related_target")
+                    If related_target = "" Then related_target = "false"
+    				
+                    Dim related_width As Integer = 0
+                    If Request("related_width") <> "" Then related_width = Convert.ToInt32(Request("related_width"))
+    				
+                    Dim related_height As Integer = 0
+                    If Request("related_height") <> "" Then related_height = Convert.ToInt32(Request("related_height"))
+    				
+                    Dim related_size As Integer = 0
+                    If Request("related_size") <> "" Then related_size = Convert.ToInt32(Request("related_size"))
+    				
+    				
+    				
+                    If id_related > 0 Then
+                        related = New CORE_RELATED(id_related)
+                    Else
+                        related = New CORE_RELATED()
+                                          
+                        If related_id_user > 0 Then related.related_id_user = related_id_user
+                    End If
+    				
+                    related.related_title = related_title
+                    related.related_link = related_link
+    				
+                    If related_title <> "" Then related.related_title = related_title
+                    If related_type > 0 Then related.related_type = related_type
+                    If related_link <> "" Then related.related_link = related_link
+                    If related_enabled <> "" Then related.related_enabled = related_enabled
+                    If related_target <> "" Then related.related_target = related_target
+                    If related_width > 0 Then related.related_width = related_width
+                    If related_height > 0 Then related.related_height = related_height
+                    If related_size > 0 Then related.related_size = related_size
+    							
+                    Dim cacheobj As CORE_CACHE = New CORE_CACHE()
+                    If id_related > 0 Then
+                        cacheobj = New CORE_CACHE("related_" & id_related.ToString().ToLower(), "relateds")
+                        cacheobj.remove_cache()
+                    
+                    End If
+                    
+                    If id_content > 0 Then
+    					
+                        cacheobj = New CORE_CACHE("contents_related_list_" & id_content.ToString().ToLower(), "contents")
+                        cacheobj.remove_cache()
+                        
+                    End If
+                    cacheobj.Dispose()
+                    cacheobj = Nothing
+                    If id_related > 0 Then
+                        related.related_update(related)
+                        returnData("<values><related id=""0""/><error errorId=""0"" errorLabel=""""/></values>")
+                    Else
+                        Dim newId As Integer = related.related_insert(related)
+                        
+                        returnData("<values><related id=""" & newId & """/><error errorId=""0"" errorLabel=""""/></values>")
+                        related.newRelation(id_content, newId)
+    						
+                    End If
+    				
+                    related.Dispose()
+                    related = Nothing
+    				
+    				
+    				
+                Catch err As Exception
+                    returnData("<values><error errorId=""504"" errorLabel=""Manage Related Error""/></values>")
+                    
+                Finally
+                    If Not related Is Nothing Then related.Dispose() : related = Nothing
+                End Try
+    		
+                '#############################################################
+                '#############################################################	
+                '#############################################################	
+            Case "addRelations"
+                
+                Dim relatedKeys As String = Request("relatedKeys")
+                Dim contentKeys As String = Request("contentKeys")
+                Dim cacheobj As CORE_CACHE = New CORE_CACHE
+                Dim related As CORE_RELATED = New CORE_RELATED
+                Dim rKeys() As String = relatedKeys.Split("|")
+                Dim cKeys() As String = contentKeys.Split("|")
+                
+                Try
+                                      
+                    Dim cValue As Integer
+                    Dim rValue As Integer
+                    
+                    For Each cValue In cKeys
+                        
+                        
+                        For Each rValue In rKeys
+                        
+                            related.newRelation(cValue, rValue)
+                        
+                        Next
+                        cacheobj = New CORE_CACHE("contents_related_list_" & cValue.ToString().ToLower(), "contents")
+                        cacheobj.remove_cache()
+                        
+                    Next
+                    
+                    
+                               
+                
+                    returnData("<values><error errorId=""0"" errorLabel=""""/></values>")
+                
+                Catch err As Exception
+    		
+                    returnData("<values><error errorId=""505"" errorLabel=""Add Relateds"" errorMsg=""" & err.Message.ToString() & """/></values>")
+    		
+                Finally
+                    If Not cacheobj Is Nothing Then cacheobj.Dispose() : cacheobj = Nothing
+    		
+                End Try
+                '#############################################################
+                '#############################################################	
+                '#############################################################	
+            Case "removeAllRelated"
+                
+               
+                Dim cacheobj As CORE_CACHE = New CORE_CACHE
+                Dim related As CORE_RELATED = New CORE_RELATED
+             
+                
+                Try
+                                      
+                  
+                    related.removeAllRelated(id_content)
+                        
+                       
+                    cacheobj = New CORE_CACHE("contents_related_list_" & id_content.ToString().ToLower(), "contents")
+                    cacheobj.remove_cache()
+                        
+                  
+                    
+                               
+                
+                    returnData("<values><error errorId=""0"" errorLabel=""""/></values>")
+                
+                Catch err As Exception
+    		
+                    returnData("<values><error errorId=""506"" errorLabel=""Add Relateds"" errorMsg=""" & err.Message.ToString() & """/></values>")
+    		
+                Finally
+                    If Not cacheobj Is Nothing Then cacheobj.Dispose() : cacheobj = Nothing
+    		
+                End Try
+                '#############################################################
+                '#############################################################	
+                '#############################################################	
+            Case "getRelated"
+    		
+                Try
+                    
+              
+                    Dim re As CORE_RELATED = New CORE_RELATED(id_related)
+    		
+                                       
+                    returnData("<values><value title=""" & Server.HtmlEncode(re.related_title) & """  id_related=""" & re.id_related & """  language=""" & re.related_language & """ target=""" & re.related_target & """ enabled=""" & re.related_enabled & """  clicks=""" & re.related_clicks & """ link=""" & Server.HtmlEncode(re.related_link) & """ type=""" & re.related_type & """ id_user=""" & re.related_id_user & """ width=""" & re.related_width & """ height=""" & re.related_height & """ size=""" & re.related_size & """ date=""" & re.related_date_creation & """  /><error errorId=""0"" errorLabel=""""/></values>")
+                    re.Dispose()
+                    re = Nothing
+                
+                Catch ex As Exception
+                    
+                    returnData("<values><error errorId=""507"" errorLabel=""Get Related Error"" errorMessage=""" & ex.ToString & """/></values>")
+                    
+                End Try
+                '#############################################################
+                '#############################################################	
+                '#############################################################			
+            Case "updateRelatedField"
+                Dim re As CORE_RELATED = New CORE_RELATED(id_related)
+                
+                Try
+                                       
+                    re.update_field(id_related, Request("field"), Request("value"))
+                    re.refreshCache()
+                    If Not re Is Nothing Then re.Dispose() : re = Nothing
+                    
+                    returnData("<values><error errorId=""0"" errorLabel=""""/></values>")
+                
+                              
+                Catch ex As Exception
+                    
+                    returnData("<values><error errorId=""508"" errorLabel=""Update Post Field Error"" errorMessage=""" & ex.ToString & """/></values>")
+                    
+                Finally
+                    If Not re Is Nothing Then re.Dispose() : re = Nothing
+                    
+                End Try
+                '#############################################################
+                '#############################################################	
+                '#############################################################	
+    		
+            Case "deleteRelateds"
+                
+                Dim related As CORE_RELATED = New CORE_RELATED(id_related)
+                Dim relateds() As String = Request("relateds").Split("|")
+                
+                Try
+    					
+                    
+                    Dim rel As Integer = 0
+                    For Each rel In relateds
+                    
+                        related = New CORE_RELATED(rel)
+                        Dim path As String = ConfigurationManager.AppSettings("CORE_related_folder").ToString() & related.related_link
+                        related.delete_related(rel)
+                        related.Dispose()
+                        related = Nothing
+                        CORE_filesystem.fileDelete(path)
+    		
+                    Next
+                        
+                    
+                    
+                    returnData("<values><error errorId=""0"" errorLabel=""""/></values>")
+                
+                Catch err As Exception
+    		
+                    returnData("<values><error errorId=""509"" errorLabel=""Delete Relateds Error""/></values>")
+    		
+                Finally
+    		
+                    If Not related Is Nothing Then related.Dispose() : related = Nothing
+                End Try
+        End Select
+    		
+    		
+    End Sub
+   
+    Sub returnData(ByVal myData As String)
+               
+        If responseType = "json" Then
+            Dim Doc As New XmlDocument()
+            Doc.LoadXml(myData)
+            Response.ContentType = "text/plain"
+            Response.Write(JSON.XmlToJSON(Doc))
+            Doc = Nothing
+        ElseIf responseType = "xml" Then
+            Response.ContentType = "text/xml"
+            Response.Write(myData)
+        End If
+     		
+    End Sub
+ 
+        
+        </script>

@@ -1,0 +1,86 @@
+﻿<script language="vb" runat="server">
+    
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+    Dim searcher As CORE_CONTENT_searcher = Nothing
+    
+    
+'/////////////////////////////////////////////////////////////////////////////////////////
+
+    Sub Page_load()
+   		 
+        Dim mybox As CORE_BOX = New CORE_BOX(_id_box)
+        boxStyle = mybox.style
+        mybox.Dispose()
+        mybox = Nothing
+        
+        Dim trees As ArrayList = New ArrayList
+        trees.Add(3)
+        searcher = New CORE_CONTENT_SEARCHER()
+        searcher.trees = trees
+        searcher.rows = 3
+        searcher.page = 1
+        searcher.searchOrder = CORE_CONTENT_SEARCHER.order.contentDatePublicationDesc
+        searcher.searchStatus = CORE_CONTENT_SEARCHER.status.enabled
+        searcher.id_language = CORE.MyPage(Me).root_mypage.language_id
+        searcher.searchHolder.contexts = False
+        searcher.searchHolder.relateds = False
+        pages.DataSource = searcher.search()
+		pages.databind()
+		pages.dispose()
+        pages = Nothing
+        
+		
+		end sub
+		
+    
+      
+		
+		</script>
+ 
+<div id="box_<%=id_box%>">
+<div <%=boxStyle %>>
+<asp:Repeater runat="server" id="pages" EnableViewState="false">
+<HeaderTemplate>
+<h3>Ultime News</h3>
+<p>
+<ul>
+</HeaderTemplate>
+<ItemTemplate>
+<li><a href="/it/2/news/dettaglio-<%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.id_key%>-<%#CORE_formatting.urlFilter(CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title)%>.aspx"><span><%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title%> - <%#CORE_formatting.dateFormat(CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_date_publication, "ddd, d MMMM yyyy")%></span></a></li>
+</ItemTemplate>
+<FooterTemplate>
+</ul>
+</p>
+</FooterTemplate>
+</asp:Repeater>
+
+</div>
+</div>

@@ -1,0 +1,9 @@
+﻿
+#sitelayoutContainer{ height:600px;
+       
+	}  
+
+#contatti{padding:0 25px 0 25px;}
+#contatti h2{color:#000; font-size:300%; margin:0 0 10px 0; padding:0 0 0 0; font-weight:normal; line-height:100%;}
+
+#contatti p{ font-size:1.3em; color:#666; line-height:1.4em;}

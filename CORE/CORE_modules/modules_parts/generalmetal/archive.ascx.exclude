@@ -1,0 +1,123 @@
+﻿<script language="vb" runat="server">
+    
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+    Dim searcher As CORE_CONTENT_searcher = Nothing
+    
+    
+'/////////////////////////////////////////////////////////////////////////////////////////
+
+    Sub Page_load()
+   		 
+        Dim mybox As CORE_BOX = New CORE_BOX(_id_box)
+        boxStyle = mybox.style
+        mybox.Dispose()
+        mybox = Nothing
+        
+		'response.write(CORE.MyPage(Me).root_mypage.treeObject.id_key)
+		
+        Dim trees As New ArrayList
+        trees.Add(CORE.MyPage(Me).root_mypage.treeObject.id_key)
+        searcher = New CORE_CONTENT_SEARCHER()
+        searcher.trees = trees
+        searcher.searchOrder = CORE_CONTENT_SEARCHER.order.contentIdAsc
+        searcher.searchStatus = CORE_CONTENT_SEARCHER.status.enabled
+        searcher.id_language = CORE.MyPage(Me).root_mypage.language_id
+       
+        searcher.searchHolder.contexts = False
+        searcher.searchHolder.relateds = False
+        pages.DataSource = searcher.search()
+		pages.databind()
+		pages.dispose()
+		pages=nothing
+        
+		
+		end sub
+		
+    
+       Function displayCover(ByVal id_content As Integer, ByVal cover As Integer, ByVal title As String, ByVal link As String) As String
+        
+        Dim CoverString As String = String.Empty
+		
+        If CORE_filesystem.fileExists(ConfigurationManager.AppSettings("CORE_related_folder").Replace("\", "/") & id_content & "/" & id_content & "_" & cover & ".jpg") Then
+        
+            CoverString = "<a href=""" & link & """ title=""" & title & """><img src=""/covers.aspx?img=" & ConfigurationManager.AppSettings("CORE_related_folder").Replace("\", "/") & id_content & "/" & id_content & "_" & cover & ".jpg&w=70&h=70"" alt="""" class=""coverImage"" alt=""" & title & """ align=""left""/></a>"
+        
+        Else
+            CoverString = "<a href=""" & link & """ title=""" & title & """ ><img src=""/core/core_images/generic/noCover.gif"" class=""coverImage noCover"" alt=""" & title & """ align=""left""/></a>"
+		
+        End If
+        
+        Return CoverString
+        
+    End Function
+		
+		</script>
+ 
+<div id="box_<%=id_box%>">
+<div <%=boxStyle %>>
+<h2><%=CORE.MyPage(Me).root_mypage.treeObject.tree_title %></h2>
+<asp:Repeater runat="server" id="pages" EnableViewState="false">
+<HeaderTemplate>
+<div id="productItems">
+</HeaderTemplate>
+<ItemTemplate>
+<div class="productItem">
+
+<%#displayCover(CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.id_key, CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_default_cover, CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title,CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_path & "dettaglio-" & CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.id_key & "-" & CORE_formatting.urlFilter(CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title)&".aspx")%> 
+<a href="<%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_path%>dettaglio-<%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.id_key%>-<%#CORE_formatting.urlFilter(CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title)%>.aspx"><%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title%></a>
+<p><%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_abstract%></p>
+
+    <asp:repeater runat="server" ID="contexts" DataSource='<%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentContexts%>' EnableViewState="false">
+    <HeaderTemplate><ul></HeaderTemplate>
+    <ItemTemplate>
+    <li><%#CType(Container.DataItem, CORE_CONTEXT).context_title%></li>
+    </ItemTemplate>
+    <FooterTemplate></ul></FooterTemplate>
+    </asp:repeater>
+
+    <asp:repeater runat="server" ID="relateds" DataSource='<%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentRelateds%>' EnableViewState="false">
+    <HeaderTemplate><ul></HeaderTemplate>
+    <ItemTemplate>
+    <li><%#CType(Container.DataItem, CORE_RELATED).related_title%></li>
+    </ItemTemplate>
+    <FooterTemplate></ul></FooterTemplate>
+    </asp:repeater>
+<span class="clear"></span>    
+</div>
+</ItemTemplate>
+<FooterTemplate>
+<div class="clear"></div>
+</div>
+</FooterTemplate>
+</asp:Repeater>
+
+</div>
+</div>

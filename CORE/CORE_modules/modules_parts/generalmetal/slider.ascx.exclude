@@ -1,0 +1,256 @@
+﻿    <script language="vb" runat="server">
+        
+        Dim boxStyle As String = String.Empty
+        Dim boxTitle As String = String.Empty
+        Dim boxDescription As String = String.Empty
+        
+        Dim _id_box As Integer = 0
+        Dim _box_position As Integer = 0
+
+        Public Property id_box() As Integer
+
+            Get
+                Return _id_box
+            End Get
+
+            Set(ByVal value As Integer)
+                _id_box = value
+            End Set
+        End Property
+        
+        Public Property box_position() As Integer
+
+            Get
+                Return _box_position
+            End Get
+
+            Set(ByVal value As Integer)
+                _box_position = value
+            End Set
+        End Property
+
+        Dim searcher As CORE_CONTENT_SEARCHER = Nothing
+        
+        
+        '/////////////////////////////////////////////////////////////////////////////////////////
+
+        Sub Page_load()
+       		 
+            Dim mybox As CORE_BOX = New CORE_BOX(_id_box)
+            boxStyle = mybox.style
+			boxTitle = mybox.box_title
+            mybox.Dispose()
+            mybox = Nothing
+            
+            Dim currentPage As Integer = CORE.MyPage(Me).root_mypage.currentPage
+            If currentPage = 0 Then currentPage = 1
+            Dim display As Integer = 10
+            
+            Dim trees As New ArrayList
+            trees.Add(CORE.MyPage(Me).root_mypage.treeObject.id_key)
+            searcher = New CORE_CONTENT_SEARCHER()
+            searcher.trees = trees
+            searcher.searchOrder = CORE_CONTENT_SEARCHER.order.contentDatePublicationDesc
+            searcher.searchStatus = CORE_CONTENT_SEARCHER.status.enabled
+            searcher.id_language = CORE.MyPage(Me).root_mypage.language_id
+            searcher.searchHolder.contexts = False
+            searcher.searchHolder.relateds = False
+            searcher.page = currentPage
+            searcher.rows = display
+            pages.DataSource = searcher.search()
+            pages.DataBind()
+            pages.Dispose()
+            pages = Nothing
+            
+            
+            Dim records As Integer = searcher.searchcount()
+           
+    		
+            searcher.Dispose()
+            searcher = Nothing
+            
+          
+            
+    		
+        End Sub
+    		
+    		
+        Sub covers(ByVal o As Object, ByVal e As RepeaterItemEventArgs)
+        
+            If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
+            
+                Dim ltCovers As Literal = e.Item.FindControl("ltCovers")
+                Dim idContent As Integer = CType(e.Item.DataItem, CORE_CONTENT_HOLDER).contentData.id_content
+                           
+                If CType(e.Item.DataItem, CORE_CONTENT_HOLDER).contentData.content_covers > 0 Then
+                    
+                    Dim i As Integer = 0
+                    Dim covers As StringBuilder = New StringBuilder
+                    Dim imgPath As String = String.Empty
+    				
+                    Dim small As Integer = 50
+                    Dim big As Integer = 450
+                    Dim bigExtra As Integer = 600
+                    Dim storedSmall As String = "[" & small.ToString() & "x50]"
+                    Dim storedBig As String = "[" & big.ToString() & "x0]"
+                    Dim storedBigExtra As String = "[" & bigExtra.ToString() & "x0]"
+                    For i = 1 To CType(e.Item.DataItem, CORE_CONTENT_HOLDER).contentData.content_covers
+                        
+                        imgPath = ConfigurationManager.AppSettings("CORE_related_folder").Replace("\", "/") & idContent & "/" & idContent & "_" & i
+    					
+    					
+                        If CORE_filesystem.fileExists(imgPath & storedSmall & ".jpg") Then
+                            covers.Append("<img src=""" & imgPath & storedBig & ".jpg"" class=""slideImage"" id=""slideImage" & i - 1 & """ alt=""""/><img src=""" & imgPath & storedSmall & ".jpg""  class=""slideCover"" id=""slideCover" & i - 1 & """ alt=""""/><a href=""" & imgPath & storedBigExtra & ".jpg"" rel=""shadowbox"" class=""slideExtra"" id=""slideExtra" & i - 1 & """><img src=""" & imgPath & storedBigExtra & ".jpg""  alt=""""/></a>")
+                        Else
+    					
+                            If CORE_filesystem.fileExists(imgPath & ".jpg") Then
+                                covers.Append("<img src=""/covers.aspx?img=" & imgPath & ".jpg&w=" & big.ToString() & "&h=0"" alt="""" class=""slideImage"" id=""slideImage" & i - 1 & """/><img src=""/covers.aspx?img=" & imgPath & ".jpg&w=" & small.ToString() & "&h=50"" alt="""" class=""slideCover"" id=""slideCover" & i - 1 & """/><a href=""/covers.aspx?img=" & imgPath & ".jpg&w=" & bigExtra.ToString() & "&h=0"" rel=""shadowbox"" class=""slideExtra"" id=""slideExtra" & i - 1 & """><img src=""/covers.aspx?img=" & imgPath & ".jpg&w=" & bigExtra.ToString() & "&h=0"" alt="""" /></a>")
+                            End If
+                        End If
+    					
+    					
+    					
+                                           
+                    Next
+                    
+                    ltCovers.Text = covers.ToString()
+                    covers = Nothing
+                    ltCovers.Dispose()
+                    ltCovers = Nothing
+                   
+                End If
+                
+            
+            End If
+            
+            
+        End Sub
+            
+       
+    		
+		    </script>
+
+
+<script language="javascript">
+
+var counter=0;
+var numSlides=0;
+var interval;
+var slideItemsCounter=0;
+var slideItems=0;
+
+$(document).ready(function(){
+
+
+
+$("#slideContents .slideItems h3").each(function(i){$("<li>"+$(this).html()+"</li>").appendTo("#switchSlideShow ul");})
+slideItems=$("#switchSlideShow a").size();
+
+$("#switchSlideShow a").click(function(e){ e.preventDefault(); setUpImages($(this).attr("rel"));slideItemsCounter=$(this).attr("rel"); return false; });
+
+$("#switchSlideShow").appendTo("#column1");
+
+setUpImages(0)
+
+$("#slideImages").hover(function(){clearInterval(interval)},function(){interval=setInterval("cycleImages()", 5000);})
+
+
+$("#slideImages").click(function(){
+$("#slide_"+ slideItemsCounter +" #slideExtra"+counter).trigger("click");
+});
+
+
+})
+
+
+
+
+function setUpImages(i)
+{
+
+
+if (interval!=undefined){clearInterval(interval);}
+counter=0;
+numSlides=0;
+$("#sliderTitle").text($("#switchSlideShow a").eq(i).text());
+$("#sliderDescription").text($("#slide_"+i+" p").eq(0).text());
+
+$("#switchSlideShow a").removeClass("selected");
+$("#switchSlideShow a").eq(i).addClass("selected");
+
+$("#slideContainer #slideImages,#slideContainer #slideCovers").html("");
+$($("#slideContents #slide_"+ i +" .slideImage").clone()).appendTo("#slideImages");
+$($("#slideContents #slide_"+ i +" .slideCover").clone()).appendTo("#slideCovers");
+
+		$("#slideCovers img").click(function(){
+		clearInterval(interval)
+		$("#slideImages img").eq(counter).fadeOut();
+		$("#slideCovers img").eq(counter).animate({opacity:0.5});
+		counter=$("#slideCovers img").index(this);
+		$("#slideImages img").eq(counter).fadeIn();
+		$("#slideCovers img").eq(counter).animate({opacity:1});
+		interval=setInterval("cycleImages()", 5000);
+		})
+
+		$("#slideCovers img").hover(function(){$(this).addClass("hover")},function(){$(this).removeClass("hover")})
+
+numSlides=$("#slideContents #slide_"+ i +" .slideCover").size();
+$("#slideImages .slideImage").eq(0).show();
+$("#slideCovers .slideCover").eq(0).animate({opacity:1});
+interval=setInterval("cycleImages()", 5000);
+}
+
+function cycleImages(){
+$("#slideImages img").eq(counter).fadeOut();
+$("#slideCovers img").eq(counter).animate({opacity:0.5});
+counter++;
+if(counter==numSlides){
+counter=0;
+slideItemsCounter++;
+if(slideItemsCounter==slideItems){slideItemsCounter=0;setUpImages(0)}
+setUpImages(slideItemsCounter)
+}
+$("#slideImages img").eq(counter).fadeIn();
+$("#slideCovers img").eq(counter).animate({opacity:1});
+}
+
+</script>
+
+    <div id="box_<%=id_box%>">
+    <div <%=boxStyle %>>
+	<h3><span><%=boxTitle%></span></h3>
+	
+
+<asp:Repeater runat="server" id="pages" EnableViewState="false" OnItemDataBound="covers">
+    <HeaderTemplate>
+    <div id="slideContents">
+    </HeaderTemplate>
+            <ItemTemplate>
+                <div  id="slide_<%#container.itemindex %>" class="slideItems">
+                <h3><a href="<%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_path%>dettaglio-<%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.id_key%>-<%#CORE_formatting.urlFilter(CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title)%>.aspx" class="switch" rel="<%#container.itemindex %>"><%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_title%></a></h3>
+               <%#CType(Container.DataItem, CORE_CONTENT_HOLDER).contentData.content_description%>
+                       
+                 <asp:Literal ID="ltCovers" runat="server"></asp:Literal>
+                </div>
+            </ItemTemplate>
+    <FooterTemplate>
+    </div>
+    </FooterTemplate>
+</asp:Repeater>
+<style type="text/css">
+#slideImages
+{ cursor:pointer;
+    
+    }
+    
+</style>
+<div id="slideContainer">
+<div id="sliderTitle"></div>
+<div id="sliderDescription"></div>
+<div id="slideImages"></div>
+<div id="slideCovers"></div>
+<div id="switchSlideShow"><ul></ul></div>
+</div>
+
+    </div>
+    </div>

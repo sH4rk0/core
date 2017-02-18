@@ -1,0 +1,15 @@
+﻿
+
+#homeVideo{ padding:0 10px 0 20px;}
+#homeVideo h2{}
+#homeVideo h2 span{  display:none;}
+#homeVideo a{float:left;}
+#homeVideo a img{margin-right:15px;}
+#homeVideo h3 {font-size:1.5em; line-height:100%; margin-bottom:10px; }
+#homeVideo h3 a{ float:none; color:#000;}
+#homeVideo p {font-size:1.3em;line-height:135%; margin-top:5px; color:#666;}
+#homeVideo .contentItem{ margin-bottom:20px; clear:both; min-height:100px;}
+
+
+
+

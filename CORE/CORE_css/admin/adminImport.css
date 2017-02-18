@@ -1,0 +1,462 @@
+a.header_link, a.header_link:link, a.header_link:visited
+{
+    font-family:Arial;
+    font-size:9pt;
+    color:#000000;
+}
+
+.header-title 
+{
+    background-image: url(/CORE/CORE_images/admin/header-title-bg.gif);
+    background-repeat: repeat-x;
+    height: 50px;
+    font-size: 11px;
+    color: #ffffff;
+    min-width: 980px;
+	 border: 0px solid #FFFFFF;
+	 padding: 0px 0px 0px 0px;
+	 clear: both;
+}
+
+.header-title .container
+{
+	height: 50px;
+	line-height: 50px;
+	zoom: 1;
+} 
+
+
+.header-title-text
+{
+	margin: 0px 0px 0px 0px;
+	border: 0px solid #FFFFFF;
+	padding: 0px 0px 0px 10px;	
+	line-height: 50px;
+	text-align: left;
+}
+
+.header-title .header-title-left
+{
+	font-size: 25px;
+	float: left;
+	margin: 0px 0px 0px 10px;
+	color: #000000;
+}
+
+.header-title .header-title-right
+{
+	float: right;
+	margin: 0px 10px 0px 0px;
+	font-size: 12px;
+	width: auto;
+	color: #000000;
+	zoom: 1;
+	line-height: 50px;
+	height: 50px;
+}
+
+.header-title .header-title-right img
+{
+	vertical-align: middle;
+}
+
+.header-title .header-title-right img#spacer
+{
+	vertical-align: middle;
+	width: 0px;
+	height: 50px;
+}
+
+
+
+/*-------------------------------------
+           End General Styles
+--------------------------------------*/
+
+/*-------------------------------------
+       	General Header Styles
+--------------------------------------*/
+.logo-header-container {
+    background-color: #000000;
+    height: 26px;
+}
+
+.logo-header-container p {
+    margin: 0;
+    padding: 0;
+}
+
+.logo-text,
+.logo {
+    float: left;
+	height: 26px;
+	display: inline;
+}
+
+.logo-text 
+{
+	padding: 0px 10px;
+	line-height: 26px;
+}
+
+.logo .anchor
+{
+	width: 100%;
+	height: 26px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.logo-header-container a,
+.logo-header-container a:link,
+.logo-header-container a:visited,
+.menu-header a,
+.menu-header a:link,
+.menu-header a:visited,
+.menu-header a:hover {
+    color: #a9caf3;
+}
+
+.suite-logo {
+	background-image: url(/CORE/CORE_images/admin/suite-logo.gif);
+	height: 26px;
+	width: 211px;
+    float: left;
+	background-repeat: no-repeat;
+}
+
+.app-logo {
+	background-image: url(/CORE/CORE_images/admin/off-logo.gif);
+	height: 26px;
+	width: 200px;
+    float: left;
+	background-repeat: no-repeat;
+}
+
+
+.menu-header 
+{
+	
+	height: 36px;
+	font-size: 11px;
+	line-height: 1;
+	color: #ffffff;
+	min-width: 980px;
+	z-index: 3000;
+	background-image: url(/CORE/CORE_images/admin/header-menu-bg.gif);
+	background-repeat: repeat-x;
+}
+
+.admin-header h1 {
+    float: left;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: arial, verdana, Helvetica, sans-serif;
+    padding: 15px 0 0 20px;
+    color: #fbab1e;
+}
+
+.top-bar {
+    float: right; 
+    color: #ffffff; 
+    font-size: 11px; 
+    padding: 3px 50px 0pt 0pt;
+	 height: 19px;
+	 line-height: 19px;
+}
+
+.top-bar p {
+	display: inline;
+	color: #FFFFFF;
+	float: left; 
+	font-size: 12px;
+	margin-left: 25px;
+	
+}
+
+.top-bar p a 
+{
+	font-size: 11px;
+}
+
+.top-bar p img {
+	border: 0;
+}
+
+.top-bar-buttons {
+	float: right;
+	margin-right: 10px;
+}
+
+.top-bar-buttons p {
+	float: left;
+	margin-left: 10px;
+	margin-top: 3px;
+	display: inline;
+}
+
+.top-bar-buttons p a img {
+	border: 0 !important;;
+}
+
+
+.right-content {
+    float: right;
+    padding: 9px 10px 0px 0;
+    text-align: right;
+}
+
+.right-content p {
+    padding: 0;
+    margin: 0;
+}
+
+.right-content span {
+    padding-right: 20px;
+}
+
+.right-content img {
+    vertical-align: middle;
+}
+
+.right-content p {
+    padding-bottom: 7px;
+}
+
+/*-------------------------------------
+       End General Header Styles
+--------------------------------------*/
+
+/*-------------------------------------
+		  Tabs Menu Styles
+--------------------------------------*/
+
+.tabs-menu {
+	/*margin: -23px 0 0 100px;*/
+	margin: 13px 0 0 100px;
+	position: relative;
+	float: left;
+	display: inline;
+}
+
+.tabs-menu ul {
+	margin:0; 
+	padding: 0;
+	list-style: none;
+	font-size: 12px;
+	height: 24px;	
+	float: left;
+	background-image: url(/CORE/CORE_images/admin/white-gif.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+
+.tabs-menu li {
+	margin: 0px 0px 0px 1px; /*-- space between tabs --*/
+	padding: 0px 10px 0px 0px; 
+	background-repeat: no-repeat;
+	float: left;
+	position: relative;
+}
+
+.tabs-menu li.activelink {
+	background-repeat: no-repeat;
+}
+
+.tabs-menu li a,
+.tabs-menu li a:link,
+.tabs-menu li a:visited {
+	display: block;
+	float: left;
+	padding: 5px 3px 0px 15px; 
+	text-align: center;
+	white-space: nowrap;
+	background-repeat: no-repeat;
+	text-decoration: none;
+	min-height: 17px;
+	height: 17px;
+	outline: none;
+}
+
+.tabs-menu li.activelink a, 
+.tabs-menu li.activelink a:link, 
+.tabs-menu li.activelink a:visited {
+	background-repeat: no-repeat;
+}
+
+.tabs-menu li:hover, 
+.tabs-menu li.sfhover {
+	background-position: 100% -200px;
+	cursor: pointer;
+	border-bottom: 1px solid #ffffff;
+}
+
+.tabs-menu ul li:hover a,
+.tabs-menu ul li:hover a:link,
+.tabs-menu ul li:hover a:visited,
+.tabs-menu ul li.sfhover a,
+.tabs-menu ul li.sfhover a:link,
+.tabs-menu ul li.sfhover a:visited {
+	background-position: 0 -200px;
+}
+
+.tabs-menu li.activelink:hover {
+	background-position: 100% -200px;
+}
+
+.tabs-menu li.activelink:hover a {
+	background-position: 0 0;
+}
+
+.tabs-menu li a.button,
+.tabs-menu li a.button:link,
+.tabs-menu li a.button:visited, 
+.tabs-menu li a.button:hover {
+	background-image: none !important;
+	padding: 0;
+	margin: 1px 0 0 0;
+	display: inline;
+}
+
+.tabs-menu li a.button img {
+	margin-top: 4px; 
+	margin-left: 2px;
+}
+
+.arrow-button {
+	background-image: url(/CORE/CORE_images/admin/menu-arrow.gif);
+	background-repeat: no-repeat;
+	height: 13px;
+	width: 13px;
+}
+
+.arrow {
+	margin-left: 2px;
+	height: 13px !important;
+	width: 13px !important;
+	border: 0;
+}
+
+* html .arrow {
+	margin-top: 4px;
+}
+
+/*-------------------------------------
+		  End Tabs Menu Styles
+--------------------------------------*/
+
+/*-------------------------------------
+		 Drop Down Menu Styles
+--------------------------------------*/
+
+.tabs-menu ul li ul {
+	position: absolute;
+	left: -999em;
+	border-right: 1px solid #c9c9c9;
+	width: 172px;
+	margin: 23px 0 0 -1px;
+	.margin-top: 1px;
+	height: auto !important;
+	height: 1%;
+	padding: 0;
+	clear: left;
+	min-width: 0;
+	float: none;
+	background-color: #ffffff;
+	z-index: 3000;
+}
+
+.tabs-menu ul li ul li {
+	background-image: none;
+	border-bottom: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tabs-menu ul li ul li a,
+.tabs-menu ul li ul li a:link,
+.tabs-menu ul li ul li a:visited {
+	height: auto !important;
+	text-align: left;
+	display: block;
+	background-image: none !important;
+	padding: 5px 6px 5px 10px;
+	line-height: 17px;
+	width: 155px;
+	background-color: #ffffff;
+	border-bottom: 1px dashed #c9c9c9 !important;
+	border-left: 1px solid #c9c9c9 !important;
+	min-height: 0;
+	white-space: normal;
+}
+
+.tabs-menu ul li ul li.last-nav-item a,
+.tabs-menu ul li ul li.last-nav-item a:link,
+.tabs-menu ul li ul li.last-nav-item a:visited {
+	border-bottom: 1px solid #c9c9c9 !important;
+}
+
+.tabs-menu ul li ul li.first-nav-item {
+	
+}
+
+.tabs-menu ul li ul li a:hover {
+	background-color: #f5f5f5 !important;
+}
+
+.tabs-menu ul li:hover ul,
+.tabs-menu ul li.sfhover ul {
+	left: auto;
+}
+
+.tabs-menu ul li ul li:hover,
+.tabs-menu ul li ul li.sfhover {
+	border-bottom: none;
+}
+/*-------------------------------------
+	  End General Header Styles
+--------------------------------------*/
+
+/*-------------------------------------
+			Tabs Menu Styles
+--------------------------------------*/
+.tabs-menu li {
+	background: url(/CORE/CORE_images/admin/tabs.gif) 100% 0px;
+	border-bottom: 1px solid #1f54bc;
+}
+
+.tabs-menu li a,
+.tabs-menu li a:link,
+.tabs-menu li a:visited {
+	background: url(/CORE/CORE_images/admin/tabs.gif) no-repeat 0 0px;
+	color: #000000;
+}
+
+.tabs-menu li.activelink {
+	background: url(/CORE/CORE_images/admin/tabs.gif) 100% -200px;
+	border-bottom: 1px solid #ffffff;
+}
+
+.tabs-menu li.activelink a, 
+.tabs-menu li.activelink a:link, 
+.tabs-menu li.activelink a:visited {
+	background: url(/CORE/CORE_images/admin/tabs.gif) 0 -200px;
+	color: #000000;
+}
+
+.tabs-menu ul li:hover a,
+.tabs-menu ul li:hover a:link,
+.tabs-menu ul li:hover a:visited,
+.tabs-menu ul li.sfhover a,
+.tabs-menu ul li.sfhover a:link,
+.tabs-menu ul li.sfhover a:visited {
+	color: #000000;
+}
+
+
+
+
+
+
+
+

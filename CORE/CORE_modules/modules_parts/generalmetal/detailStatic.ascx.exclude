@@ -1,0 +1,79 @@
+﻿<script language="vb" runat="server">
+    
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    Dim contents As ArrayList
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+    Dim id_content As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+    Dim mycontent As CORE_CONTENT = Nothing
+    
+    
+'/////////////////////////////////////////////////////////////////////////////////////////
+
+    Sub Page_load()
+        
+        
+        Dim mybox As CORE_BOX = New CORE_BOX(_id_box)
+        boxStyle = mybox.style
+        contents = mybox.contents
+        mybox.Dispose()
+        mybox = Nothing
+		
+       
+        
+        If Not contents Is Nothing Then id_content = contents(0)
+                
+        If id_content > 0 Then
+		phContent.visible=true
+            mycontent = New CORE_CONTENT(id_content)
+          
+            lt_content_description.Text = mycontent.content_description
+            mycontent.Dispose()
+            mycontent = Nothing
+        End If
+      
+            
+      
+       
+		
+     
+		
+        lt_content_description.Dispose()
+        lt_content_description = Nothing
+		
+    End Sub
+		
+		
+		</script>
+<asp:placeholder id="phContent" runat="server" Visible="false">    
+<div id="box_<%=id_box%>">
+<div <%=boxStyle%>>
+<asp:literal id="lt_content_description" runat="server" EnableViewState="false"></asp:literal>
+</div>
+</div>
+</asp:placeholder>    

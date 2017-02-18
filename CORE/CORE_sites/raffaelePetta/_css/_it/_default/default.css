@@ -1,0 +1,291 @@
+﻿
+
+/*
+003249 bluscuro
+54cee6 bluchiaro
+
+
+*/
+body  {  font-size: 75%; color: #222; font-family: Georgia, "Times New Roman", Times, serif; background-color:#fff; padding:34px 0 0 0; margin:0 0 0 0;
+background-image:url('/core/core_sites/raffaelePetta/_css/_it/_default/_images/headerBg.jpg'); background-repeat:repeat-x; background-position:top left;  
+
+ }
+
+
+h1 {}
+h1 span{display:none;}
+ul{margin:0; padding:0;}
+a,a:visited,a:hover{ color:#54cee6; text-decoration:none;}
+a:hover{ text-decoration:underline;}
+
+hr {border:0 #ccc solid; border-top-width:1px; clear:both; height:0;}
+.clear {
+	display: inline-block;
+}
+
+* html .clear {
+	height: 1%;
+}
+
+.clear {
+	display: block;
+}
+
+.clear:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+#sitelayoutContainer{  
+    min-width:380px;    margin:0 auto;
+         
+	} 
+#sitelayout {
+
+	
+}     
+	
+.container_12.order1.event0,
+.container_12.order1.event1,
+.container_12.order1.event2{
+	 background-image:url('/core/core_sites/raffaelePetta/_css/_it/_default/_images/mainHeaderLeft.jpg');
+background-position:top left; background-repeat: no-repeat; padding:0 0 0 0; width:100%; margin:auto;
+	height:149px; margin:0 auto;
+	}
+
+.container_12.order1.event0 .grid_12.order11,
+.container_12.order1.event1 .grid_12.order11,
+.container_12.order1.event2 .grid_12.order11 {
+	
+	 margin:0 0 0 0; padding:0 0 0 0;  
+background-image:url('/core/core_sites/raffaelePetta/_css/_it/_default/_images/mainHeaderRight.jpg'); 
+background-repeat:no-repeat; background-position:top right;
+ width:100%; height:149px; margin:0 auto;
+ position:relative;
+ }
+
+
+
+#treeSite {}
+#treeSite a {color:#fff;}
+#treeSite ul{ list-style-type:none; margin:0; padding:0;}
+
+#treeSite ul#lvl1{}
+#treeSite ul#lvl1 li a#branch1{ 
+position:absolute;
+background-image:url('/core/core_sites/raffaelePetta/_css/_it/_default/_images/logo.png'); width:400px; height:60px;  top:15px; left:0;  background-repeat:no-repeat; display:block; }
+#treeSite ul#lvl1 li a#branch1 span{display:none; }
+
+#treeSite ul#lvl2{ margin:0; padding:30px 0;  height:35px; width:380px;  line-height:0; display:block; font-size:1.5em; }
+
+#treeSite ul#lvl2 li{ margin-right:10px; line-height:1em;  display:none !important; }
+
+#treeSite ul#lvl2 li#liB2{ position:absolute; top:-30px; right:130px; padding-right:15px; border-right:1px solid #ddd; background:none!important;}
+#treeSite ul#lvl2 li#liB2 a{color:#ddd; font-size:0.8em; line-height:0em; }
+#treeSite ul#lvl2 li#liB2 a:hover{color:#ddd; font-size:0.8em; line-height:0em; background:none!important; }
+
+#treeSite ul#lvl2 li#liB3{}
+#treeSite ul#lvl2 li#liB4{}
+#treeSite ul#lvl2 li#liB5{}
+
+#treeSite ul#lvl2 li#liB6{ position:absolute; top:-30px; right:50px;background:none!important;}
+#treeSite ul#lvl2 li#liB6 a{color:#ddd; font-size:0.8em; line-height:0em; }
+#treeSite ul#lvl2 li#liB6 a:hover{background:none!important;}
+#treeSite ul#lvl2 li#liB6.selected, #treeSite ul#lvl2 li#liB6 a.selected{ background:none; text-decoration:underline;}
+
+
+#treeSite ul#lvl2 li#liB7{}
+
+#treeSite ul#lvl2 li.page_item { padding-left:7px; padding-bottom:0px; margin:0 5px 0 0; display:inline-block; text-align: center; }
+#treeSite ul#lvl2 li.page_item a.selected,#treeSite ul#lvl2 li.page_item a.selected:hover{color:#fff!important;}
+#treeSite ul#lvl2 li.page_item a {border:0; display:block; text-decoration:none; overflow:hidden; padding:7px 7px 10px 0px; margin:0; }
+#treeSite ul#lvl2 li.page_item a:hover, #treeSite ul#lvl2 li.page_item a:focus{color: #003249; }
+
+
+#lvl2 li:hover {background:url(/core/core_sites/raffaelePetta/_css/_it/_default/_images/mainMenuHoverL.png) no-repeat top left; line-height:1em;}
+#lvl2  li:hover a {background:url(/core/core_sites/raffaelePetta/_css/_it/_default/_images/mainMenuHover.png) no-repeat top right; line-height:1em;}
+
+#lvl2 li.selected {background:url(/core/core_sites/raffaelePetta/_css/_it/_default/_images/mainMenuHoverL.png) no-repeat top left; line-height:1em;}
+#lvl2  li.selected a {background:url(/core/core_sites/raffaelePetta/_css/_it/_default/_images/mainMenuHover.png) no-repeat top right; line-height:1em;}
+
+#menuBtn{display:block; width:32px; height:32px; background:url(/core/core_sites/raffaelePetta/_css/_it/_default/_images/menu.png) no-repeat top right; 
+position:absolute; top:10px; left:25px;
+}
+
+#menuContainer { 
+
+    position: fixed;
+    left: -320px; 
+    width:320; 
+	background-color:rgba(0,0,0,0.8);
+	top:0;
+	bottom:0;
+	height:100%;
+	z-index:10000;
+	pointer-events:auto;
+	padding:20px;
+	
+	
+}
+
+#menuList ul#lvl1{}
+#menuList ul#lvl1 #liB1 a{display:none;}
+#menuList ul#lvl1 ul#lvl2 a{display:block;  color:#fff; margin:0; padding:0; font-size:1.5em; line-height:1em;}
+#menuList ul#lvl1 ul#lvl2 li{ background:none;  margin:0; padding:0; margin-bottom:10px; line-height:1em;}
+#menuList ul#lvl1 ul#lvl2 a:hover{ background:none;  margin:0; padding:0;}
+#menuList #lvl2 li.selected {background-image:none;}
+#menuList #lvl2  li.selected a {background:none;  }
+
+/*footer*/
+
+.container_12.order3.event0,
+.container_12.order3.event1,
+.container_12.order3.event2{
+	background-color:#363636; color:#fff; background-image:url('/core/core_sites/raffaelePetta/_css/_it/_default/_images/footerBg.jpg'); background-repeat:repeat-x; background-position:top left;
+	
+	}
+
+#customFooter{}
+#footer{ padding:15px 25px 0 25px;}
+ 
+
+#footer #footerLine{ font-size:1.3em; height:75px; line-height:1.3em; }
+#footer #footerLine a{color:#003249;}
+
+#footer #footerBoxes{}
+#footer #footerBoxes #footerBox1{}
+#footer #footerBoxes #footerBox1 h3{ color:#54cee6;}
+#footer #footerBoxes #footerBox1 small{ font-size:1.1em;}
+#footer #footerBoxes #footerBox1 hr{}
+#footer #footerBoxes #footerBox1 p{font-size:1.1em;}
+
+#footer #footerBoxes #footerBox2{ margin-top:20px;}
+#footer #footerBoxes #footerBox2 h3{color:#54cee6;}
+#footer #footerBoxes #footerBox2 small{font-size:1.1em;}
+#footer #footerBoxes #footerBox2 hr{}
+#footer #footerBoxes #footerBox2 p{font-size:1.1em; line-height:1.3;}
+
+#footer #footerEnd{}
+#footer #footerEnd .simpleMenu{ margin:0; padding:0; list-style-type:none; margin-top:20px;}
+
+#footer #footerEnd .simpleMenu li a{ display:block; background-color:#54cee6; margin-bottom:10px; padding:10px; color:#fff;}
+#footer #footerEnd p{ padding-bottom:10px;}
+
+
+/*breadcrumbs
+-------------------------------------------------------------------------------------------------------------------------------*/
+#breadCrumbs{padding:20px;}
+#breadCrumbs a{ text-decoration:none; }
+#breadCrumbs a span{ color:#777; padding-right:10px; }
+#breadCrumbs a span span{ padding-right:18px; background-image:url(/core/core_sites/defaultSite/_css/_it/_core/_images/bg/bread.gif); background-repeat:no-repeat; background-position:center right;}
+
+
+
+/*cover box
+---------------------*/
+
+div.coversBox { width:100%;}
+div.coversBox ul.gallery { margin:0 0 0 0; padding:0 0 0 0; list-style-type:none;}
+div.coversBox ul.gallery li { display:inline-block; margin-right:10px; margin-bottom:10px; color:#fff;}
+.cover{ width:100px; height:100px; background-repeat: no-repeat; }
+
+
+/* puntoDiVista
+---------------------*/
+#puntoDiVista{padding:0 20px 20px 20px; margin:0 0 0 0;}
+#puntoDiVista h2{ color:#54d2f1; margin:0 0 20px 0; padding:0 0 0 0; border-bottom:3px solid #54d2f1;}
+#puntoDiVista .contentItems{ margin:0 0 0 0; padding:0 0 0 0;}
+#puntoDiVista .contentItem{ margin:0 0 0 0; padding:0 0 0 0;}
+#puntoDiVista div.contentItem h3{  color:#000; font-size:1.4em; margin:0 0 0 0; padding:0 0 0 0; font-weight:normal;}
+#puntoDiVista div.contentItem h3 a{color:#000000; text-decoration:none;}
+#puntoDiVista p.contentDate{ clear:both; display:none; }
+#puntoDiVista p.contentAbstract{padding:5px 0; margin:0; font-size:1.2em; color:#999; margin-bottom:20px; }
+
+
+/* Ultime News
+---------------------*/
+#ultimeNews{padding:0 20px 20px 20px; margin:0 0 0 0;}
+#ultimeNews h2{ color:#54d2f1; margin:0 0 20px 0; padding:0 0 0 0; border-bottom:3px solid #54d2f1;}
+#ultimeNews .contentItems{ margin:0 0 0 0; padding:0 0 0 0;}
+#ultimeNews .contentItem{ margin:0 0 0 0; padding:0 0 0 0;}
+#ultimeNews div.contentItem h3{  color:#000; font-size:1.4em; margin:0 0 0 0; padding:0 0 0 0; font-weight:normal;}
+#ultimeNews div.contentItem h3 a{color:#000000; text-decoration:none;}
+#ultimeNews p.contentDate{ clear:both; display:none; }
+#ultimeNews p.contentAbstract{padding:5px 0; margin:0; font-size:1.2em; color:#999; margin-bottom:20px; }
+
+
+/* detail
+---------------------*/
+.contentDetail,.detailCovers{padding:0 20px 0 20px;}
+.contentDetail h2, .contentTitle{ color:#000; font-size:2.3em; margin:0 0 10px 0; padding:0 0 0 0; font-weight:normal; line-height:100%;}
+.contentDetail p.contentDate{display:none;} 
+.contentDetail div.contentDescription{ margin-bottom:20px;font-size:1.3em; color:#666; line-height:1.4em; }
+.contentDetail ul{margin:0 0 30px 30px;}
+.contentDetail div.tags{ margin-bottom:20px;}
+
+
+
+.coverInContent{float:left; margin:10px 10px 10px 0;}
+
+.youtube{ padding:8px 0 0 0; margin-top:30px;  background-repeat:no-repeat; width:100%;  margin:auto;}
+.youtube iframe{margin:0 0 0 0; padding: 0 0 0 0; width:100%!important;}
+
+
+
+
+
+
+@media screen and (min-width: 480px) and (max-width: 767px){	
+
+body  { /*background-color:#f00;*/ }
+
+#menuBtn{display:block;}
+#treeSite ul#lvl1 li a#branch1{ }
+#treeSite ul#lvl2{ padding:30px 0;  display:block;}
+#treeSite ul#lvl2 li{display:hidden; display:none !important;}
+#menuBtn{display:block;}
+	}
+@media screen and (min-width: 768px)  and (max-width: 1023px) {
+	
+	body  { /*background-color:#fc0;*/ }
+	
+#treeSite ul#lvl1 li a#branch1{ }
+#treeSite ul#lvl2{ margin:0 0 0 370px; padding:30px 0;  display:block;}
+#treeSite ul#lvl2 li{display:inline-block !important; }
+
+#footer #footerLine{ font-size:1.6em; height:75px; line-height:1.3em; }
+	
+#menuBtn{display:none;}
+	}
+	
+	
+@media screen and (min-width: 1024px)  {	
+
+body  {/* background-color:#0cf; */}
+
+
+#treeSite ul#lvl1 li a#branch1{ }
+#treeSite ul#lvl2{ margin:0 0 0 470px; padding:30px 0; display:block;}
+#treeSite ul#lvl2 li{display:inline-block !important; }
+
+.container_12.order1.event0,
+.container_12.order1.event1,
+.container_12.order1.event2,
+.container_12.order2.event0,
+.container_12.order2.event1,
+.container_12.order2.event2,#footer
+{ width:900px; margin:0 auto;
+ }
+#footer{width:840px; margin:0 auto;}
+#footer #footerLine{ font-size:2em; height:75px; line-height:1.3em; }
+
+#menuBtn{display:none;}
+
+	}
+
+	

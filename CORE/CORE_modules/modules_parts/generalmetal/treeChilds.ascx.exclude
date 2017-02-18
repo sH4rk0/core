@@ -1,0 +1,118 @@
+﻿<%@ Control Language="VB" %>
+<%@ Import Namespace="System.Data" %>
+<script language="vb" runat="server">
+
+    
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = Value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+   
+    '/////////////////////////////////////////////////////////////////////////////////////////
+    Sub Page_load()
+
+           
+        Dim mycache As String = HttpRuntime.Cache.remove("tree_html.cache".ToLower())
+        If mycache = "" Then
+        
+            Dim mytree As CORE_TREE_SEARCHER = New CORE_TREE_SEARCHER(CORE.MyPage(Me).root_mypage.id_site, CORE.MyPage(Me).root_mypage.treeObject.id_tree, 2)
+            mytree.tree_enabled = "enabled"
+            mytree.levels = 1
+            makeHtree(mytree.search(), "LtSiteTree")
+        
+            mytree.Dispose()
+            mytree = Nothing
+			
+        Else
+            LtSiteTree.Text = mycache
+        End If
+        
+        Dim mybox As New CORE_BOX(id_box)
+        boxStyle = mybox.style
+        boxTitle = mybox.box_title
+        boxDescription = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+      
+    End Sub
+
+    '/////////////////////////////////////////////////////////////////////////////////////////
+    
+    Sub makeHtree(ByVal tree As DataTableReader, ByVal container As String)
+	
+	
+        Dim _container As Literal = FindControl(container)
+        Dim Jstring As String = "<ul>"
+        Dim level As Integer
+        Dim i As Integer
+        Dim temp_level As Integer = 0
+        Dim context_id As String
+        Dim context_descrizione As String = String.Empty
+        Dim a As Integer = 1
+        Dim id_opt As String = String.Empty
+        Do While tree.Read()
+            
+            context_descrizione = tree("tree_title")
+            context_id = tree("id_tree")
+            level = tree("tree_level")
+            If level < temp_level Then Jstring = Jstring & "</li></ul></li>"
+            If level = temp_level Then Jstring = Jstring & "</li>"
+            If level > 1 And level <> temp_level And level > temp_level Then Jstring = Jstring & "<ul>"
+            If tree("id_father") = "0" Then 
+			id_opt = "0" 
+			 Jstring = Jstring & "<li><a href=""/"" id=""opt_0""><span>" & tree("tree_title") & "</span></a>"
+			Else 
+			
+                Jstring = Jstring & "<li><a href=""/" & CORE.MyPage(Me).root_mypage.language & "/" & tree("id_tree") & "/" & CORE_formatting.urlFilter(tree("tree_title")) & "/default.aspx"" id=""opt_" & tree("id_key") & """><span>" & tree("tree_title") & "</span></a>"
+			
+			end if
+     
+        
+            temp_level = level
+            a = a + 1
+        Loop
+        tree.Close()
+        For i = 1 To level
+            Jstring = Jstring & "</li></ul>"
+        Next
+        
+        'HttpRuntime.Cache.Insert("tree_html.cache", Jstring, Nothing, DateTime.Now().AddMonths(1), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, Nothing)
+        
+        _container.Text = Jstring
+        
+       
+    End Sub
+  </script>
+
+<div id="box_<%=id_box%>">
+<div <%=boxStyle %>>
+<h3>Categorie di prodotti</h3>
+
+<asp:literal id="LtSiteTree" runat="server" />
+</div>		
+</div>

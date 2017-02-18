@@ -1,0 +1,60 @@
+<%@ Control Language="VB" %>
+<script language="vb" runat="server">
+
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+Public Property id_box As integer
+
+	Get
+	Return _id_box
+	End Get
+
+	Set
+	_id_box = value
+	End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+    
+    Sub page_load()
+        
+        
+        Dim mybox As New CORE_BOX(id_box)
+        boxStyle = mybox.style
+        boxTitle = mybox.box_title
+        boxDescription = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+        
+    End Sub
+
+</script>
+
+<div id="box_<%=id_box%>">
+
+<div <%=boxStyle %>>
+<script src="/core/CORE_js/jquery.jmap.min-r72.js" type="text/javascript"></script>
+<script  type="text/javascript">
+jQuery(document).ready(function(){
+jQuery('#map').jmap('init', {'mapType':'hybrid','mapCenter':[37.4419, -122.1419]});
+});
+</script>
+<div id="map" style="width:480px;height:480px"></div>
+
+</div>
+
+</div>

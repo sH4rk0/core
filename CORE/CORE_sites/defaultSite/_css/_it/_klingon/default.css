@@ -1,0 +1,68 @@
+﻿body  {font-family: Georgia, serif; background-color:white; margin:0 0 0 0; padding:0 0 0 0;}
+
+header{ position:fixed; top:0; left:0px; height:70px; overflow:auto; width:100%; background-color:#fff; line-height:70px;}
+
+h1 {font-size:140%; margin:0; margin-left:10px; padiding:0; float:left;}
+#sitelayoutContainer{position:relative; width:100%; margin:0 auto; background-color:#fff; margin-top:70px; background-color:#fff;}
+#sitelayout{ width:100%; overflow:auto;}
+#klingon-container{ width:40%; float:left;}
+#klingon-container img{ width:100%;}
+#klingon{ font-size:100%; width:50%; float:left; margin-left:20px; }
+header{ overflow:hidden;}
+#footer{height:70px; overflow:auto; display: block; clear:both; width:100%; margin:0 auto; background-color:#fff;}
+#core{display:block; float:right; width:145px; height:59px; background:url('/core/core_images/admin/logoWhiteSmall.gif')  no-repeat;}
+#core span{display:none;}
+
+#refresh{display:block; float:right; width:50px; margin-right:5px;}
+#refresh img{ width:100%;}
+#refresh span{display:none;}
+
+
+body.loading #loadingBar span{
+	
+	-webkit-animation: myfirst 5s 50; /* Chrome, Safari, Opera */
+    animation: myfirst 5s 50;
+	
+	-webkit-transition: all 300ms ease-in-out;
+     -moz-transition: all 300ms ease-in-out;
+          transition: all 300ms ease-in-out;
+	
+}
+	
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+    0%   {width:0%;}
+	100% {width:100%;}
+}
+
+/* Standard syntax */
+@keyframes myfirst {
+     0%   {width:0%;}
+	100% {width:100%;}
+}
+
+#loadingBar{width:100%; height:5px; background-color:#fff;}
+#loadingBar span{display:block; height:5px; position:absolute; top:0; left:0; background-color:#000; overflow:hidden; width:0%;}
+
+
+
+@media screen and (min-width: 480px) and (max-width: 767px){
+body{}	
+h1 {font-size:200%;}
+#klingon{ font-size:150%;}
+	}
+@media screen and (min-width: 768px)  and (max-width: 1023px) {
+body{}
+h1 {font-size:250%;}
+#klingon{ font-size:170%;}	
+	}
+@media screen and (min-width: 1024px)  and (max-width: 1199px) {
+body{}	
+h1 {font-size:300%;}
+#klingon{ font-size:200%;}	
+	}
+@media screen and (min-width: 1200px) {
+body{}	
+h1 {font-size:300%;}
+#klingon{ font-size:200%;}	
+	}

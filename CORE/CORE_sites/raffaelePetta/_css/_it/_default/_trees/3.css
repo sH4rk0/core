@@ -1,0 +1,21 @@
+﻿
+
+
+#bioPhoto{ text-align:center;}
+#bioBio{}
+
+
+
+#curriculumTab{}
+
+#curriculumTab div h3{  background-color:#54cee6; margin:20px 0 20px 0; padding:5px; color:#fff;}
+#curriculumTab ul {margin:0 0 0 0; padding:0 0 0 0;}
+#curriculumTab ul li{ display:inline-block; width:150px; height:80px;}
+
+#curriculumTab div p span{display:block; border-bottom:1px dashed #eee; color:#999; font-style:italic; }
+#curriculumTab ol{ margin-left:30px;}
+#curriculumTab ol li{padding-bottom:3px;}
+
+
+
+#tab6 ol{ margin:0; padding:0; padding-left:20px;}

@@ -1,0 +1,56 @@
+﻿
+body
+{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+font-size: 80%;
+background:url() right top;
+background-repeat: repeat-x;
+color: #39319c;
+text-align: left;
+background-color:#7b73d6;
+font-family: Verdana;
+}
+
+input,textarea{ padding:5px; background-color:#39319c; color:#7b73d6; border:0; font-family: Verdana; font-size:12px; }
+
+/*
+postForm
+-------------------------------------------------------------------------------------------------------------------------------*/
+ #postForm{ width:99%; margin:auto;}
+ #postForm h2{ margin:0 0 0 0; padding:0 0 0 0; clear:both;}
+ #postForm h3{ margin:0 0 0 0; padding:10px 0 3px 0; clear:both; font-size:100%;}
+ #postForm #postSubject{ width:600px;}
+ #postForm #postEmail { width:300px;}
+ #postForm #postUsername { width:150px;}
+ #postForm #postPassword { width:100px;}
+ .postLogged{display:none;}
+ #postForm p { margin:0 0 0 0; padding: 0 0 0 0; text-align:right;}
+ 
+ #postForm #postDescription { width:600px; height:200px; overflow:auto;}
+ #postForm .textareaBoxMiddleLeft{ width:600px; }
+
+#postForm h3 label sup{ color:white;}
+
+a.postType.selected{ text-decoration: underline;}
+
+#captcha{margin-top:15px; clear:both;}
+#captchaImage { vertical-align:middle;}
+#captchaRefresh{ width:16px; height:16px; display: inline-block; background-image:url('/core/core_sites/defaultSite/_css/_it/_default/_images/ico/refresh.png'); }
+#captchaRefresh span{display:none;}
+
+#postCaptcha{ font-size:25px; width:150px; height:40px; padding-top:10px; vertical-align:middle; }
+
+#compulsoryFields{ text-align:right; width:600px; padding:10px; margin-top:10px;}
+#compulsoryFields span{color:White;}
+
+#votes{margin-top:5px;}
+a.vote{color:white; padding:4px; display:inline-block; text-decoration:none;}
+a.vote.selected{ background-color:#39319c;}
+a.vote.hover{ background-color:#39319c;}
+
+a.formButton{ font-size:16px; background-color:#39319c; color:#7b73d6; padding:5px; text-decoration:none; font-weight:bold;}
+a.formButton:hover {color:White; }
+#submitButton{ margin-top:10px; width:610px; text-align:right;}
+
+.postMessage{ padding:10px; background-color:#39319c; color:#7b73d6; width:560px;}

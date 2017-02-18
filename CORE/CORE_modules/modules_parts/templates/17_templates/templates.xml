@@ -1,0 +1,13 @@
+﻿<templateData>
+<templates>
+  <template id="0" label="Default"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+  <template id="1" label="First"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+  <template id="2" label="Second"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+  <template id="3" label="Third"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+  <template id="4" label="Fourth"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+<template id="5" label="Fifth"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+  <template id="6" label="Sixth"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+   <template id="7" label="Seventh"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+</templates>
+<config module="false" dimension="true" cache="false" description="false" style="true" dates="false" rows="true" contents="true" relateds="true" contexts="true" trees="true" users="true" contentTypes="true"></config>
+</templateData>

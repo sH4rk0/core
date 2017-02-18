@@ -1,0 +1,80 @@
+﻿<%@ Control Language="VB" %>
+<script language="vb" runat="server">
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+    
+    Sub page_load()
+        
+        
+        Dim mybox As New CORE_BOX(id_box)
+        boxStyle = mybox.style
+        boxTitle = mybox.box_title
+        boxDescription = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+        
+    End Sub
+    
+
+  </script>
+
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+var selected = '#opt_<%=CORE.MyPage(Me).root_mypage.id_tree%>';
+var id_content=<%=CORE.MyPage(Me).root_mypage.id_content%>;
+
+
+if(selected!='#opt_0'){
+$(selected).addClass("selected")
+$(selected).parent().parent().parent().find("a").eq(0).addClass("tree_selected")
+$(selected).parent().parent().parent().parent().parent().find("a").eq(0).addClass("tree_selected")
+$(selected).parent().parent().parent().parent().parent().parent().parent().find("a").eq(0).addClass("tree_selected")
+
+
+var breadcrumbs='';
+$("#header_tree .tree_selected").each(function(i){
+breadcrumbs+='<li><a href="'+ $(this).attr("href") +'" >' + $(this).html()  + '</a></li>';
+})
+
+var last=''
+if (id_content==0){last="<li>" + $(selected).html() +  "</li>"}
+if (id_content!=0){last="<li><a href=" + $(selected).attr("href") + " >" + $(selected).html() +  "</a></li><li><%=root_tree_title%></li>"}
+
+$("#breadcrumbs").html("<ul>"+breadcrumbs+ last +"</ul>")
+}
+ });
+</script>
+
+<div id="box_<%=id_box%>">
+<div <%=boxStyle %>>
+<div id="breadcrumbs"></div>
+</div>
+</div>
+

@@ -1,0 +1,56 @@
+<%@ Control Language="VB" %>
+<script language="vb" runat="server">
+
+
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+    Public Property id_box() As Integer
+
+        Get
+            Return _id_box
+        End Get
+
+        Set(ByVal value As Integer)
+            _id_box = value
+        End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+
+
+    Sub page_load()
+        
+        
+        Dim mybox As New CORE_BOX(id_box)
+        boxStyle = mybox.style
+        boxTitle = mybox.box_title
+        boxDescription = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+        
+    End Sub
+
+</script>
+
+<!--start box_<%=id_box%> -->
+<div id="box_<%=id_box%>">
+<div <%=boxStyle%> style="margin-top:20px;">
+<p>Etiam libero nisi, auctor at laoreet ac, lobortis nec nisl. Cras eget suscipit orci. Etiam in rutrum dui. Nulla interdum, dolor nec bibendum mollis, ante orci rutrum urna, facilisis suscipit nunc orci ut leo. Praesent eleifend magna sed nulla gravida volutpat. Vestibulum sodales sem vitae massa rhoncus hendrerit. Sed eget accumsan magna. Vivamus ligula massa, fermentum elementum pulvinar et, volutpat in dolor.</p>
+<p>Nullam aliquet semper sem, eu mattis mi tristique non. Nulla ac scelerisque purus. Sed ornare malesuada erat, ut porttitor arcu bibendum et. Phasellus vitae quam orci, blandit vehicula massa. Mauris semper lacus eget dolor faucibus vitae commodo elit consectetur. Nullam id enim arcu. Pellentesque vitae libero lectus, nec ultrices tellus.</p>
+</div>
+</div>
+<!--end box_<%=id_box%> -->

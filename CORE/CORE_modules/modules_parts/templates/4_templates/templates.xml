@@ -1,0 +1,14 @@
+﻿<templateData>
+<templates>
+  <template id="0" label="Default"><![CDATA[ text description for admin ]]></template>
+  <template id="1" label="First"><![CDATA[ text description for admin ]]></template>
+  <template id="2" label="Second"><![CDATA[ text description for admin ]]></template>
+  <template id="3" label="Third"><![CDATA[ text description for admin ]]></template>
+  <template id="4" label="Fourth"><![CDATA[ text description for admin ]]></template>
+  <template id="5" label="Fifth"><![CDATA[ text description for admin ]]></template>
+  <template id="6" label="Six"><![CDATA[ text description for admin ]]></template>
+  <template id="7" label="Seventh"><![CDATA[ text description for admin ]]></template>
+  <template id="8" label="Eigth"><![CDATA[ text description for admin ]]></template>
+</templates>
+<config module="false" dimension="true" cache="false" description="false" style="true" dates="false" rows="true" contents="true" relateds="true" contexts="true" trees="true" users="true" contentTypes="true"></config>
+</templateData>

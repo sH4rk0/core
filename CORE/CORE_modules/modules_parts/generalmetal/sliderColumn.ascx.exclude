@@ -1,0 +1,83 @@
+﻿<%@ Control Language="VB" %>
+<script language="vb" runat="server">
+
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+Public Property id_box As integer
+
+	Get
+	Return _id_box
+	End Get
+
+	Set
+	_id_box = value
+	End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+    
+	    Dim searcher As CORE_CONTENT_searcher = Nothing
+	
+    Sub page_load()
+       
+        Dim mybox As New CORE_BOX(id_box)
+        boxStyle = mybox.style
+        boxTitle = mybox.box_title
+        boxDescription = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+    End Sub
+
+</script>
+
+    <script language="javascript">
+
+var counter=0;
+var images=0;
+var interval='';
+
+$(document).ready(function(){
+images=$(".slide").length-1;
+$("#image0").fadeIn();
+interval=setInterval("cycleImages()", 5000);
+$("#slideShow ul").hover(function(){clearInterval(interval)},function(){interval=setInterval("cycleImagess()", 5000);})
+})
+
+function cycleImages(){
+$("#image"+counter).fadeOut();
+counter++;
+if(counter==images+1){counter=0;}
+$("#image"+counter).fadeIn();
+}
+
+</script>
+<style type="text/css">
+#slideShow{position:relative; width:250px; height:200px; background-color:#000000; margin:10px 10px 20px 10px;}
+.slide{ position:absolute; top:0; left:0; border:none;}
+</style>
+
+<div id="slideShow" >
+<a href="/it/5/realizzazioni/default.aspx">
+<img src="/public/core_related/slide1.jpg" id="image0" class="slide" style="display:none;"/>
+<img src="/public/core_related/slide2.jpg" id="image1" class="slide" style="display:none;"/>
+<img src="/public/core_related/slide3.jpg" id="image2" class="slide" style="display:none;"/>
+<img src="/public/core_related/slide4.jpg" id="image3" class="slide" style="display:none;"/>
+<img src="/public/core_related/slide5.jpg" id="image4" class="slide" style="display:none;"/>
+</a>
+</div>
+
+

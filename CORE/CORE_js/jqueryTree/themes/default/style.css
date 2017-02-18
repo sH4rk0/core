@@ -1,0 +1,57 @@
+/* LOCKED */
+.tree-default .locked li a { color:gray; }
+/* DOTS */
+.tree-default ul { background-position:6px 1px; background-repeat:repeat-y; background-image:url(data:image/gif;base64,R0lGODlhAgACAIAAAB4dGf///yH5BAEAAAEALAAAAAACAAIAAAICRF4AOw==); _background-image:url("dot_for_ie.gif"); *background-image:url("dot_for_ie.gif"); }
+.tree-default li { background-position:-64px -16px; background-repeat:no-repeat; background-image:url("icons.png"); }
+/* NO DOTS */
+.tree-default .no_dots, .tree-default .no_dots ul { background:transparent; }
+.tree-default .no_dots li.leaf { background-image:none; background-color:transparent; }
+/* OPEN or CLOSED */
+.tree-default li.open { background:url("icons.png") -32px -48px no-repeat; }
+.tree-default li.closed, #jstree-dragged.tree-default li li.open { background:url("icons.png") -48px -32px no-repeat; }
+#jstree-marker { background-image:url("icons.png"); }
+/* DEFAULT, HOVER, CLICKED, LOADING STATES */
+.tree-default li a, .tree-default li span { border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px; }
+.tree-default li a:hover, .tree-default li a.hover, .tree-default li span { background: #74b4f1; border:1px solid #74b4f1; padding:0px 3px 0px 3px; }
+.tree-default li a.clicked, .tree-default li a.clicked:hover, .tree-default li span.clicked { background: #3a7ee4; border:1px solid #3a7ee4; padding:0px 3px 0px 3px; color:#ffffff; }
+/* ICONS */
+.tree-default ins { background-image:url("icons.png"); background-position:0 0; background-repeat:no-repeat; }
+.tree-default ul li a.loading ins { background-image:url("throbber.gif") !important; background-position:0 0 !important; } /* UL is added to make selector stronger */
+.tree-default li a ins.forbidden { background-position:-16px -16px; }
+.tree-default .locked li a ins { background-position:0 -48px; }
+.tree-default li span ins { background-position:-16px 0; }
+#jstree-dragged.tree-default ins { background:url("icons.png") -16px -32px no-repeat; }
+#jstree-dragged.tree-default ins.forbidden { background:url("icons.png") -16px -16px no-repeat; }
+
+/* CONTEXT MENU */
+.tree-default-context a ins { background-image:url("icons.png"); background-repeat:no-repeat; background-position:-64px -64px; }
+.tree-default-context a ins.create { background-position:0 -16px; }
+.tree-default-context a ins.rename { background-position:-16px 0px; }
+.tree-default-context a ins.remove { background-position:0 -32px; }
+.tree-default-context a ins.layout { background-image:url("/core/core_images/admin/layout_ico.png"); background-repeat:no-repeat; background-position:0 0; }
+.tree-default-context a ins.edit { background-image:url("/core/core_images/admin/folder_edit.png"); background-repeat:no-repeat; background-position:0 0; }
+.tree-default-context a ins.select { background-image:url("/core/core_images/admin/checkedOn.gif"); background-repeat:no-repeat; background-position:0 0; }
+.tree-default-context a ins.contents { background-image:url("/core/core_images/admin/content_context_disabled.gif"); background-repeat:no-repeat; background-position:0 0; }
+
+.tree-default-context a ins.toContent { background-image:url("/core/core_images/admin/copy_clipboard.gif"); background-repeat:no-repeat; background-position:0 0; }
+
+
+#jstree-contextmenu { display:none; position:absolute; z-index:2000; list-style-type:none; margin:0; padding:0; left:-2000px; top:-2000px; } 
+.tree-context { margin:20px; padding:0; width:180px; border:2px solid #000000; padding:2px; background:#f5f5f5; list-style-type:none; }
+.tree-context li { height:22px; margin:0 0 0 27px; padding:0; background:#ffffff; border-left:1px solid #e0e0e0; }
+.tree-context li a { position:relative; display:block; height:22px; line-height:22px; margin:0 0 0 -28px; text-decoration:none; color:black; padding:0; }
+.tree-context li a ins { text-decoration:none; float:left; width:16px; height:16px; margin:0 0 0 0; background-color:#f0f0f0; border:1px solid #ffffff; border-width:3px 5px 3px 6px; line-height:16px; }
+.tree-context li a span { display:block; background:#ffffff; margin:0 0 0 29px; padding-left:5px; }
+.tree-context li.separator { background:#f0f0f0; height:2px; line-height:2px; font-size:1px; border:0; margin:0; padding:0; }
+.tree-context li.separator span { display:block; margin:0px 0 0px 27px; height:1px; border-top:1px solid #e0e0e0; border-left:1px solid #e0e0e0; line-height:1px; font-size:1px; background:white; }
+
+.tree-context li a:hover { border:1px solid #ffffff; height:20px; line-height:20px; }
+.tree-context li a:hover span { background:#74b4f1; margin-left:28px; }
+.tree-context li a:hover ins { background-color:#ffffff; border-color:#ffffff; border-width:2px 5px 2px 5px; }
+
+.tree-context li a.disabled { color:gray; cursor:default; }
+.tree-context li a.disabled ins {  cursor:default;}
+.tree-context li a.disabled:hover { border:0; height:22px; line-height:22px;  cursor:default;}
+.tree-context li a.disabled:hover span { background:#fff; margin-left:29px; }.tree-context li a.disabled:hover ins { border-color:#fff; background-color:#fff; border-width:3px 5px 3px 6px;  cursor:default;}
+
+

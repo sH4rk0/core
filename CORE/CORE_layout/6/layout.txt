@@ -1,0 +1,50 @@
+﻿<!--box:5-->
+<div class="container_12">
+<div class="grid_12">
+<div id="layoutBox1" class="groupWrapper" position="1">
+[box1]
+<p position="1" class="dropArea">&nbsp;</p>
+</div>
+</div>
+</div>
+
+<div class="container_12">
+<div class="grid_12">
+<div id="layoutBox2" class="groupWrapper" position="2">
+[box2]
+<p position="2" class="dropArea">&nbsp;</p>
+</div>
+</div>
+</div>
+
+<div class="container_12">
+<div class="grid_12">
+<div class="grid_6 alpha">
+<div id="layoutBox3" class="groupWrapper" position="3">
+[box3]
+<p position="3" class="dropArea">&nbsp;</p>
+</div>
+</div>
+
+<div class="grid_6  omega">
+<div id="layoutBox4" class="groupWrapper" position="4">
+[box4]
+<p position="4" class="dropArea">&nbsp;</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container_12">
+<div class="grid_12">
+<div id="layoutBox5" class="groupWrapper" position="5">
+[box5]
+<p position="5" class="dropArea">&nbsp;</p>
+</div>
+</div>
+</div>
+
+<div style="clear:both;"></div>
+
+
+

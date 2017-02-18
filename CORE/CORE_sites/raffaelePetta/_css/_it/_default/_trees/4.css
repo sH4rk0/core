@@ -1,0 +1,22 @@
+﻿
+
+
+#homePDV{ padding:0 10px 0 25px; }
+#homePDV h2{display:none;}
+#homePDV h2 span{ }
+
+#homePDV a{ display:block;}
+#homePDV a img{ width:100%;} 
+
+#homePDV h3 {font-size:2em; line-height:100%; margin:0; padding:0; margin-top:20px; font-weight:normal; }
+#homePDV h3 a{ float:none; color:#000;}
+#homePDV p { padding:5px 0; margin:0; font-size:1.2em; color:#999; margin-bottom:20px; }
+#homePDV div.contentItem{ margin-bottom:20px;}
+
+
+#pdvCommento{ margin-top:30px; background-color:#eee; padding:10px; }
+#pdvCommentoImage{ width:160px; height:200px;  background-image:url(/core/core_sites/raffaelePetta/_css/_it/_default/_images/raffaele-petta-small.jpg); background-repeat:no-repeat; background-position:top right; }
+#pdvCommentoText{ width:100%; padding:0 10px 0 0;}
+#pdvCommentoClose{}
+
+

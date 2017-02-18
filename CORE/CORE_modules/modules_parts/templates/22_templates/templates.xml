@@ -1,0 +1,6 @@
+﻿<templateData>
+<template id="0" label="Default"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+<template id="1" label="First"><![CDATA[ John Doe - 78 West Main St Apt 3A | Bloomsburg, PA 12345 (footer text) ]]></template>
+  
+<config module="false" dimension="true" cache="false" description="false" style="true" dates="false" rows="false" contents="true" relateds="false" contexts="false" trees="false" users="false" contentTypes="false"></config>
+</templateData>

@@ -1,0 +1,111 @@
+<%@ Control Language="VB" %>
+<script language="vb" runat="server">
+
+    Dim boxStyle As String = String.Empty
+    Dim boxTitle As String = String.Empty
+    Dim boxDescription As String = String.Empty
+    
+    Dim _id_box As Integer = 0
+    Dim _box_position As Integer = 0
+
+Public Property id_box As integer
+
+	Get
+	Return _id_box
+	End Get
+
+	Set
+	_id_box = value
+	End Set
+    End Property
+    
+    Public Property box_position() As Integer
+
+        Get
+            Return _box_position
+        End Get
+
+        Set(ByVal value As Integer)
+            _box_position = value
+        End Set
+    End Property
+    
+    Sub page_load()
+       
+        Dim mybox As New CORE_BOX(id_box)
+        boxStyle = mybox.style
+        boxTitle = mybox.box_title
+        boxDescription = mybox.box_description
+        mybox.Dispose()
+        mybox = Nothing
+        
+    End Sub
+
+</script>
+<script type="text/javascript" language="javascript">
+function tryAgain(){
+$("#contactEmail").val("");
+$("#contactMessage").val("");
+$("#returnMessage").fadeOut(function(){$("#contactForm").fadeIn();});
+}
+
+
+function checkContactForm(){
+if($("#contactEmail").val()==""){alert('Inserire un e-mail!');$("#contactEmail").focus(); return false;}
+if($("#contactMessage").val()==""){alert('Inserire un testo!');$("#contactMessage").focus(); return false;}
+var engineMain="/api/json/main/core.aspx";
+mydata="who=contactForm&"+ $(".contactSerialize").serialize();
+		$("#returnMessage").html("");
+		$("#contactForm").hide();
+		 Shadowbox.open({
+        player:     'html',
+        content:    '<div style="padding:10px; text-align:center; color:#fff;">Invio in corso</div>',
+		height:     40,
+        width:      150}
+		,
+		{modal: true, animate: false, animateFade: false, displayNav: false, onClose: function(){}});
+
+		
+		
+		$.ajax({type: "POST",url: engineMain,data: mydata,dataType: "json",
+		success: function(msg){
+		     if(msg.values.error!=undefined)
+		     {
+		         if (msg.values.error[0].errorId==0){
+		              setTimeout("closeSender(true)",1000)
+					  }
+		                else		
+		                {
+						setTimeout("closeSender(false)",1000)
+				        }
+				
+		    }
+		  }
+		 });
+
+		return false;
+}
+
+function closeSender(msg){
+Shadowbox.close();
+if (msg){
+$("#returnMessage").html("<h4>La richiesta è stata inoltrata correttamentre.</h4><p>Riceverete una risposta alla vostra richiesta di informazioni in breve tempo.</p><p>Per inviare una nuova richiesta <a href='javascript: tryAgain();'>cliccare qui</a></p>"); 
+}else{
+$("#returnMessage").html("<h4>La richiesta non è stata inoltrata.</h4><p><a href='javascript: tryAgain();'>Cliccare qui</a> per riprovare.</p>"); 
+}
+}
+</script>
+<div id="box_<%=id_box%>">
+<div <%=boxStyle %>>
+<div id="contactForm">
+<p>Inserite nei campi sottostanti un indirizzo E-mail valido e la vostra richiesta di informazioni.</p>
+<h4>E-mail: </h4>
+<input type="text" id="contactEmail" name="contactEmail" class="contactSerialize inputbox"/>
+<h4>Messaggio:</h4>
+<textarea id="contactMessage" name="contactMessage" class="contactSerialize inputbox"></textarea>
+<input type="hidden" id="contactSubject" name="contactSubject" value="Richiesta contatto" class="contactSerialize" />
+<input type="button" value="Invia" onclick="javascript: return checkContactForm();"/>
+</div>
+<div id="returnMessage"></div>
+</div>
+</div>
